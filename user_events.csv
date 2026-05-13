@@ -1,0 +1,6 @@
+user_id,signup_date,onboarding_complete,activated,retained_day1,retained_day7,referred_friend,referral_converted,subscribed,revenue
+1,2026-01-01,1,1,1,1,1,1,1,999
+2,2026-01-01,1,0,0,0,0,0,0,0
+3,2026-01-01,0,0,0,0,0,0,0,0
+4,2026-01-02,1,1,1,0,1,0,0,0
+5,2026-01-02,1,1,1,1,0,0,1,999
