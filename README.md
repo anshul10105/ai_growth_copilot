@@ -3,10 +3,7 @@
 AI Growth Copilot is an AI-powered product analytics application that analyzes user funnel data and generates actionable growth recommendations to improve activation, retention, and organic referrals.
 
 ## Live Demo
-Add your deployed Streamlit link here.
-
-## GitHub Repository
-Add your GitHub repository link here.
+Deployed Streamlit link: https://aigrowthcopilot-kq63sa7npuyff89wmxahwq.streamlit.app/
 
 ## Project Overview
 
