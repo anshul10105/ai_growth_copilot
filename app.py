@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-from src.metrics import calculate_metrics
-from src.ai_insights import generate_insights
+from metrics import calculate_metrics
+from ai_insights import generate_insights
 
 st.set_page_config(page_title="AI Growth Copilot", layout="wide")
 st.title("AI Growth Copilot")
@@ -15,7 +15,7 @@ uploaded_file = st.file_uploader("Upload CSV", type=["csv"], accept_multiple_fil
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 else:
-    df = pd.read_csv("data/user_events.csv")
+    df = pd.read_csv("user_events.csv")
     st.info("Using sample dataset from data/user_events.csv")
 
 metrics = calculate_metrics(df)
