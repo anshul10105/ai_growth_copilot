@@ -1,27 +1,26 @@
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 def generate_insights(metrics):
-    activation = metrics.get("Activation Rate", 0)
-    if activation < 50:
-        bottleneck = "Activation after onboarding is the biggest bottleneck."
-    else:
-        bottleneck = "Retention is the main opportunity area."
+    prompt = f"""
+You are a senior product manager and growth strategist.
 
-    return f'''
-### Biggest Bottleneck
-{bottleneck}
+Analyze the following product metrics:
+{metrics}
 
-### Recommended Experiments
-1. Reduce onboarding steps from 5 to 3.
-2. Add a progress bar during onboarding.
-3. Show example content immediately after signup.
-4. Send a reminder notification after 24 hours.
-5. Add referral rewards for inviting friends.
+Provide:
+1. The biggest growth bottleneck
+2. Five recommended experiments
+3. An A/B test plan
+4. A short mini PRD
+"""
 
-### A/B Test Plan
-- **Control:** Current onboarding
-- **Variant:** Simplified onboarding
-- **Primary Metric:** Activation Rate
-- **Expected Impact:** +10% to +20%
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt
+    )
 
-### Mini PRD
-Build a simplified onboarding flow to improve user activation and downstream retention.
-'''
+    return response.output_text
+
