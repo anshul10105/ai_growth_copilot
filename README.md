@@ -62,28 +62,28 @@ Deployed Streamlit link: https://aigrowthcopilot-kq63sa7npuyff89wmxahwq.streamli
 ## Input Dataset
 Expected CSV columns:
 
--user_id
--signup_date
--onboarding_complete
--activated
--retained_day1
--retained_day7
--referred_friend
--referral_converted
--subscribed
--revenue
+- user_id
+- signup_date
+- onboarding_complete
+- activated
+- retained_day1
+- retained_day7
+- referred_friend
+- referral_converted
+- subscribed
+- revenue
 
 ## Workflow 
--Upload a CSV dataset.
--Product KPIs are calculated automatically.
--Product Funnel visualization is generated.
--AI analyzes the product metrics.
--Executive Summary is created.
--Growth experiments are recommended.
--A/B Test Plan is generated.
--Mini PRD is created.
--Business impact is estimated.
--AI report can be downloaded as a PDF.
+- Upload a CSV dataset.
+- Product KPIs are calculated automatically.
+- Product Funnel visualization is generated.
+- AI analyzes the product metrics.
+- Executive Summary is created.
+- Growth experiments are recommended.
+- A/B Test Plan is generated.
+- Mini PRD is created.
+- Business impact is estimated.
+- AI report can be downloaded as a PDF.
 
 ## Project Structure
 ```text
