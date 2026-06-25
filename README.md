@@ -1,33 +1,39 @@
 # AI Growth Copilot
 
-AI Growth Copilot is an AI-powered product analytics application that analyzes user funnel data and generates actionable growth recommendations to improve activation, retention, and organic referrals.
+AI Growth Copilot is an AI-powered product analytics application that analyzes product funnel data and generates actionable growth recommendations using a Large Language Model (LLM).
+The application enables product managers and growth teams to identify user drop-offs, understand key performance metrics, and receive AI-generated recommendations, A/B testing strategies, Mini PRDs, and downloadable reports.
 
 ## Live Demo
 Deployed Streamlit link: https://aigrowthcopilot-kq63sa7npuyff89wmxahwq.streamlit.app/
 
-## Project Overview
+## Screenshots
+<img width="1847" height="490" alt="image" src="https://github.com/user-attachments/assets/802fd562-1211-49df-85ac-f21ea08b61f7" />
+<img width="1708" height="636" alt="image" src="https://github.com/user-attachments/assets/f258bbcb-ce73-48bb-b033-6e683afeaed3" />
+<img width="1746" height="677" alt="image" src="https://github.com/user-attachments/assets/bae4d974-3373-49ae-ad81-857987a1a9d6" />
+<img width="1767" height="760" alt="image" src="https://github.com/user-attachments/assets/97892883-6f44-4928-a37e-74cbebeca2ab" />
+<img width="1738" height="756" alt="image" src="https://github.com/user-attachments/assets/ad082054-fa7c-4b38-a64d-2c32291a7aea" />
+<img width="406" height="87" alt="image" src="https://github.com/user-attachments/assets/12ef2175-cff7-499f-b142-1a15600b4867" />
 
-Product and growth teams often need to identify where users drop off and decide which experiments to run next. This application automates that workflow by:
 
-1. Accepting product funnel data in CSV format
-2. Calculating key product metrics
-3. Identifying the largest growth bottleneck
-4. Generating recommended experiments
-5. Creating an A/B test plan
-6. Producing a mini Product Requirements Document (PRD)
 
-The application uses OpenAI's API to generate recommendations and includes a fallback recommendation engine to ensure uninterrupted functionality if the API is unavailable.
+
+
+
 
 ## Key Features
 
-- CSV upload for product funnel data
-- Automated KPI calculation
-- AI-generated growth recommendations
-- A/B testing plan generation
-- Mini PRD generation
-- OpenAI API integration
+- Upload product funnel datasets in CSV format
+- Calculate key product growth metrics
+- Interactive Product Funnel visualization
+- AI-generated Executive Summary
+- AI-generated Product Recommendations
+- A/B Test Plan generation
 - Fallback recommendation engine
 - Interactive web interface built with Streamlit
+- Mini PRD generation
+- Business Impact analysis
+- Download AI report as PDF
+- Fallback recommendation engine when AI is unavailable
 
 ## Product Metrics Calculated
 
@@ -45,51 +51,45 @@ The application uses OpenAI's API to generate recommendations and includes a fal
 - Python
 - Pandas
 - Streamlit
-- OpenAI API
+- Plotly
+- Groq API (Llama 3.3)
+- OpenAI Python SDK
+- ReportLab
 
-## Input Schema
+## Input Dataset
+Expected CSV columns:
 
-The application expects a CSV file with the following columns:
+-user_id
+-signup_date
+-onboarding_complete
+-activated
+-retained_day1
+-retained_day7
+-referred_friend
+-referral_converted
+-subscribed
+-revenue
 
-- `user_id`
-- `signup_date`
-- `onboarding_complete`
-- `activated`
-- `retained_day1`
-- `retained_day7`
-- `referred_friend`
-- `referral_converted`
-- `subscribed`
-- `revenue`
-
-## Example Output
-
-### Biggest Bottleneck
-Identifies the most critical growth issue (e.g., low activation, retention, or referral performance).
-
-### Recommended Experiments
-Generates product experiments such as:
-- Simplifying onboarding
-- Introducing progress indicators
-- Sending re-engagement notifications
-- Adding referral incentives
-
-### A/B Test Plan
-Defines:
-- Control and variant
-- Primary success metric
-- Expected impact
-
-### Mini PRD
-Provides a concise product requirement statement describing the feature to build and the business objective it supports.
+## Workflow 
+-Upload a CSV dataset.
+-Product KPIs are calculated automatically.
+-Product Funnel visualization is generated.
+-AI analyzes the product metrics.
+-Executive Summary is created.
+-Growth experiments are recommended.
+-A/B Test Plan is generated.
+-Mini PRD is created.
+-Business impact is estimated.
+-AI report can be downloaded as a PDF.
 
 ## Project Structure
 
-```text
-ai-growth-copilot/
-├── app.py
-├── metrics.py
+ai-growth-copilot/ 
+│
+├── app.py 
 ├── ai_insights.py
-├── user_events.csv
+├── metrics.py
+├── pdf_report.py 
+├── user_events.csv 
 ├── requirements.txt
 └── README.md
