@@ -54,6 +54,13 @@ Provide:
 
         return response.output_text
 
-    except Exception:
-        return fallback_recommendations(metrics)
+    import traceback
+import streamlit as st
+
+...
+
+except Exception as e:
+    st.error(f"OpenAI Error: {e}")
+    st.code(traceback.format_exc())
+    return fallback_recommendations(metrics)
 
