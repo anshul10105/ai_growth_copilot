@@ -1,7 +1,10 @@
 import os
+import traceback
+import streamlit as st
 from openai import OpenAI
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 def fallback_recommendations(metrics):
     activation = metrics.get("Activation Rate", 0)
@@ -32,19 +35,23 @@ def fallback_recommendations(metrics):
 Build a simplified onboarding flow to improve user activation and downstream retention.
 """
 
+
 def generate_insights(metrics):
     try:
         prompt = f"""
 You are a senior product manager and growth strategist.
 
 Analyze the following product metrics:
+
 {metrics}
 
 Provide:
 1. The biggest growth bottleneck
 2. Five recommended experiments
 3. An A/B test plan
-4. A short mini PRD
+4. A short Mini PRD
+
+Return the response in Markdown.
 """
 
         response = client.responses.create(
@@ -54,13 +61,8 @@ Provide:
 
         return response.output_text
 
-    import traceback
-import streamlit as st
-
-...
-
-except Exception as e:
-    st.error(f"OpenAI Error: {e}")
-    st.code(traceback.format_exc())
-    return fallback_recommendations(metrics)
+    except Exception as e:
+        st.error(f"OpenAI Error: {e}")
+        st.code(traceback.format_exc())
+        return fallback_recommendations(metrics)
 
