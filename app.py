@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 
 from metrics import calculate_metrics
 from ai_insights import generate_insights
-
+from pdf_report import create_pdf
 
 st.set_page_config(
     page_title="AI Growth Copilot",
@@ -76,7 +76,12 @@ fig = go.Figure(
 
 fig.update_layout(
     height=500,
-    margin=dict(l=40, r=40, t=40, b=40)
+    margin=dict(
+        l=40,
+        r=40,
+        t=40,
+        b=40
+    )
 )
 
 st.plotly_chart(
@@ -94,9 +99,13 @@ if st.button("Generate AI Recommendations"):
 
     st.markdown(insights)
 
+    # Create PDF
+    pdf = create_pdf(insights)
+
+    # Download PDF
     st.download_button(
         label="Download AI Report",
-        data=insights,
-        file_name="AI_Growth_Report.md",
-        mime="text/markdown"
+        data=pdf,
+        file_name="AI_Growth_Report.pdf",
+        mime="application/pdf"
     )
