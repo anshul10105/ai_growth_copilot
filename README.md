@@ -86,7 +86,7 @@ Expected CSV columns:
 -AI report can be downloaded as a PDF.
 
 ## Project Structure
-
+```text
 ai-growth-copilot/ 
 │
 ├── app.py 
@@ -96,3 +96,4 @@ ai-growth-copilot/
 ├── user_events.csv 
 ├── requirements.txt
 └── README.md
+```
