@@ -7,7 +7,13 @@ def create_pdf(text):
 
     buffer = BytesIO()
 
-    doc = SimpleDocTemplate(buffer)
+    doc = SimpleDocTemplate(
+        buffer,
+        rightMargin=40,
+        leftMargin=40,
+        topMargin=40,
+        bottomMargin=40
+    )
 
     styles = getSampleStyleSheet()
 
@@ -15,25 +21,35 @@ def create_pdf(text):
 
     for line in text.split("\n"):
 
+        # Replace unsupported Unicode characters
+        line = line.replace("₹", "Rs. ")
+
         line = line.strip()
 
         if not line:
             story.append(Spacer(1, 8))
             continue
 
-        # Remove Markdown heading symbols
+        # Heading level 2
         if line.startswith("##"):
             line = line.replace("##", "").strip()
             story.append(Paragraph(f"<b>{line}</b>", styles["Heading2"]))
+            continue
 
-        elif line.startswith("#"):
+        # Heading level 1
+        if line.startswith("#"):
             line = line.replace("#", "").strip()
             story.append(Paragraph(f"<b>{line}</b>", styles["Heading1"]))
+            continue
 
-        else:
-            # Remove Markdown bold markers
-            line = line.replace("**", "")
-            story.append(Paragraph(line, styles["BodyText"]))
+        # Remove markdown bold
+        line = line.replace("**", "")
+
+        # Convert bullet points
+        if line.startswith("- "):
+            line = "• " + line[2:]
+
+        story.append(Paragraph(line, styles["BodyText"]))
 
     doc.build(story)
 
