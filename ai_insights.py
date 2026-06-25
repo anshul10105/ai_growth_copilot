@@ -3,7 +3,10 @@ import traceback
 import streamlit as st
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
+)
 
 
 def fallback_recommendations(metrics):
@@ -19,50 +22,62 @@ def fallback_recommendations(metrics):
 {bottleneck}
 
 ### Recommended Experiments
-1. Reduce onboarding steps from 5 to 3.
-2. Add a progress bar during onboarding.
-3. Show example content immediately after signup.
-4. Send a reminder notification after 24 hours.
-5. Add referral rewards for inviting friends.
 
-### A/B Test Plan
-- **Control:** Current onboarding
-- **Variant:** Simplified onboarding
-- **Primary Metric:** Activation Rate
-- **Expected Impact:** +10% to +20%
+1. Reduce onboarding steps.
+2. Add a progress indicator.
+3. Improve first-time user experience.
+4. Send reminder notifications.
+5. Introduce referral rewards.
+
+### A/B Test
+
+- Control: Current onboarding
+- Variant: Simplified onboarding
+- Primary Metric: Activation Rate
 
 ### Mini PRD
-Build a simplified onboarding flow to improve user activation and downstream retention.
+
+Build a simplified onboarding experience to improve activation and retention.
 """
 
 
 def generate_insights(metrics):
-    try:
-        prompt = f"""
-You are a senior product manager and growth strategist.
 
-Analyze the following product metrics:
+    prompt = f"""
+You are a Senior Product Manager at a SaaS company.
+
+Analyze these product metrics:
 
 {metrics}
 
-Provide:
-1. The biggest growth bottleneck
-2. Five recommended experiments
-3. An A/B test plan
-4. A short Mini PRD
+Generate:
 
-Return the response in Markdown.
+1. Biggest Bottleneck
+2. Five Product Experiments
+3. A/B Test Plan
+4. Mini PRD
+5. Expected Business Impact
+
+Return the answer in Markdown.
 """
 
-        response = client.responses.create(
-            model="gpt-4.1-mini",
-            input=prompt
+    try:
+
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.5,
         )
 
-        return response.output_text
+        return response.choices[0].message.content
 
     except Exception as e:
-        st.error(f"OpenAI Error: {e}")
+        st.error(f"Groq Error: {e}")
         st.code(traceback.format_exc())
         return fallback_recommendations(metrics)
 
