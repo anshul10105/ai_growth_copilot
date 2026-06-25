@@ -18,35 +18,70 @@ def fallback_recommendations(metrics):
         bottleneck = "Retention is the main opportunity area."
 
     return f"""
-### Biggest Bottleneck
+## Executive Summary
+
+The uploaded product metrics indicate that the product is functioning well overall,
+but there is an opportunity to improve long-term engagement and user growth.
+
+## Biggest Bottleneck
+
 {bottleneck}
 
-### Recommended Experiments
+## Recommended Experiments
 
 1. Reduce onboarding steps.
-2. Add a progress indicator.
-3. Improve first-time user experience.
-4. Send reminder notifications.
+2. Add a progress indicator during onboarding.
+3. Improve the first-time user experience.
+4. Send reminder notifications after signup.
 5. Introduce referral rewards.
 
-### A/B Test
+## A/B Test Plan
 
-- Control: Current onboarding
-- Variant: Simplified onboarding
-- Primary Metric: Activation Rate
+**Control**
+- Existing onboarding flow
 
-### Mini PRD
+**Variant**
+- Simplified onboarding with fewer steps
 
-Build a simplified onboarding experience to improve activation and retention.
+**Primary Success Metric**
+- Activation Rate
+
+**Expected Outcome**
+- Increase activation by 10–20%.
+
+## Mini PRD
+
+**Problem**
+
+Users are dropping before becoming long-term active users.
+
+**Goal**
+
+Increase activation and improve retention.
+
+**Proposed Solution**
+
+Simplify onboarding and improve early user engagement.
+
+**Success Metrics**
+
+- Higher activation rate
+- Better Day 7 retention
+- Increased subscriptions
+
+## Business Impact
+
+Improving activation and retention is expected to increase
+subscription conversions and overall revenue.
 """
 
 
 def generate_insights(metrics):
 
-   prompt = f"""
+    prompt = f"""
 You are a Senior Product Manager at a fast-growing SaaS company.
 
-Analyze the following product metrics:
+Analyze the following product metrics.
 
 Total Users: {metrics['Total Users']}
 Onboarding Rate: {metrics['Onboarding Rate']:.2f}%
@@ -57,22 +92,29 @@ Referral Rate: {metrics['Referral Rate']:.2f}%
 Subscription Rate: {metrics['Subscription Rate']:.2f}%
 Revenue: ₹{metrics['Revenue']}
 
-Write a professional product analytics report using the exact headings below.
+Generate a professional product analytics report.
+
+Use exactly these headings.
 
 ## Executive Summary
-Summarize the overall product performance in 4–5 concise sentences.
+
+Summarize overall product health in 4-5 concise sentences.
 
 ## Biggest Bottleneck
-Identify the weakest stage of the product funnel and explain why it matters.
+
+Identify the weakest metric and explain why it matters.
 
 ## Recommended Experiments
+
 Suggest five practical product experiments.
+
 For each experiment include:
 - Objective
 - Reasoning
 - Expected Impact
 
 ## A/B Test Plan
+
 Include:
 - Control
 - Variant
@@ -80,6 +122,7 @@ Include:
 - Expected Outcome
 
 ## Mini PRD
+
 Include:
 - Problem Statement
 - Goal
@@ -87,13 +130,15 @@ Include:
 - Success Metrics
 
 ## Business Impact
+
 Estimate how implementing these recommendations could improve:
 - Activation
 - Retention
 - Revenue
 
-Keep the response practical, concise, and suitable for a product manager.
 Return everything in Markdown.
+
+Do not include introductory text or disclaimers.
 """
 
     try:
@@ -106,7 +151,8 @@ Return everything in Markdown.
                     "content": prompt
                 }
             ],
-            temperature=0.5,
+            temperature=0.4,
+            max_tokens=1500
         )
 
         return response.choices[0].message.content
