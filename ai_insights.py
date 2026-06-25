@@ -43,22 +43,57 @@ Build a simplified onboarding experience to improve activation and retention.
 
 def generate_insights(metrics):
 
-    prompt = f"""
-You are a Senior Product Manager at a SaaS company.
+   prompt = f"""
+You are a Senior Product Manager at a fast-growing SaaS company.
 
-Analyze these product metrics:
+Analyze the following product metrics:
 
-{metrics}
+Total Users: {metrics['Total Users']}
+Onboarding Rate: {metrics['Onboarding Rate']:.2f}%
+Activation Rate: {metrics['Activation Rate']:.2f}%
+Day 1 Retention: {metrics['Day 1 Retention']:.2f}%
+Day 7 Retention: {metrics['Day 7 Retention']:.2f}%
+Referral Rate: {metrics['Referral Rate']:.2f}%
+Subscription Rate: {metrics['Subscription Rate']:.2f}%
+Revenue: ₹{metrics['Revenue']}
 
-Generate:
+Write a professional product analytics report using the exact headings below.
 
-1. Biggest Bottleneck
-2. Five Product Experiments
-3. A/B Test Plan
-4. Mini PRD
-5. Expected Business Impact
+## Executive Summary
+Summarize the overall product performance in 4–5 concise sentences.
 
-Return the answer in Markdown.
+## Biggest Bottleneck
+Identify the weakest stage of the product funnel and explain why it matters.
+
+## Recommended Experiments
+Suggest five practical product experiments.
+For each experiment include:
+- Objective
+- Reasoning
+- Expected Impact
+
+## A/B Test Plan
+Include:
+- Control
+- Variant
+- Primary Success Metric
+- Expected Outcome
+
+## Mini PRD
+Include:
+- Problem Statement
+- Goal
+- Proposed Solution
+- Success Metrics
+
+## Business Impact
+Estimate how implementing these recommendations could improve:
+- Activation
+- Retention
+- Revenue
+
+Keep the response practical, concise, and suitable for a product manager.
+Return everything in Markdown.
 """
 
     try:
